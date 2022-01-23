@@ -10,40 +10,40 @@
 ### Preparing the data
 * In order to teach our model to be more robust when looking at new data, we're going to programmatically increase the size and variance in our dataset, also called data augmentation.The increase in size gives the model more images to learn from while training. The increase in variance helps the model ignore unimportant features and select only the features that are truly important in classification, allowing it to generalize better.
 *  Model Creation :  "sequential"
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-conv2d (Conv2D)              (None, 28, 28, 75)        750       
-_________________________________________________________________
-batch_normalization (BatchNo (None, 28, 28, 75)        300       
-_________________________________________________________________
-max_pooling2d (MaxPooling2D) (None, 14, 14, 75)        0         
-_________________________________________________________________
-conv2d_1 (Conv2D)            (None, 14, 14, 50)        33800     
-_________________________________________________________________
-dropout (Dropout)            (None, 14, 14, 50)        0         
-_________________________________________________________________
-batch_normalization_1 (Batch (None, 14, 14, 50)        200       
-_________________________________________________________________
-max_pooling2d_1 (MaxPooling2 (None, 7, 7, 50)          0         
-_________________________________________________________________
-conv2d_2 (Conv2D)            (None, 7, 7, 25)          11275     
-_________________________________________________________________
-batch_normalization_2 (Batch (None, 7, 7, 25)          100       
-_________________________________________________________________
-max_pooling2d_2 (MaxPooling2 (None, 4, 4, 25)          0         
-_________________________________________________________________
-flatten (Flatten)            (None, 400)               0         
-_________________________________________________________________
-dense (Dense)                (None, 512)               205312    
-_________________________________________________________________
-dropout_1 (Dropout)          (None, 512)               0         
-_________________________________________________________________
-dense_1 (Dense)              (None, 24)                12312     
-=================================================================
-Total params: 264,049
-Trainable params: 263,749
-Non-trainable params: 300
+  _________________________________________________________________
+  Layer (type)                 Output Shape              Param #   
+  =================================================================
+  conv2d (Conv2D)              (None, 28, 28, 75)        750       
+  _________________________________________________________________
+  batch_normalization (BatchNo (None, 28, 28, 75)        300       
+  _________________________________________________________________
+  max_pooling2d (MaxPooling2D) (None, 14, 14, 75)        0         
+  _________________________________________________________________
+  conv2d_1 (Conv2D)            (None, 14, 14, 50)        33800     
+  _________________________________________________________________
+  dropout (Dropout)            (None, 14, 14, 50)        0         
+  _________________________________________________________________
+  batch_normalization_1 (Batch (None, 14, 14, 50)        200       
+  _________________________________________________________________
+  max_pooling2d_1 (MaxPooling2 (None, 7, 7, 50)          0         
+  _________________________________________________________________
+  conv2d_2 (Conv2D)            (None, 7, 7, 25)          11275     
+  _________________________________________________________________
+  batch_normalization_2 (Batch (None, 7, 7, 25)          100       
+  _________________________________________________________________
+  max_pooling2d_2 (MaxPooling2 (None, 4, 4, 25)          0         
+  _________________________________________________________________
+  flatten (Flatten)            (None, 400)               0         
+  _________________________________________________________________
+  dense (Dense)                (None, 512)               205312    
+  _________________________________________________________________
+  dropout_1 (Dropout)          (None, 512)               0         
+  _________________________________________________________________
+  dense_1 (Dense)              (None, 24)                12312     
+  =================================================================
+  Total params: 264,049
+  Trainable params: 263,749
+  Non-trainable params: 300
 
 * Data Augmentation: Before compiling the model, it's time to set up our data augmentation. Keras comes with an image augmentation class called ImageDataGenerator. It accepts a series of options for augmenting your data. We would want to flip images horizontally, but not vertically. When you have an idea, reveal the text below. Our dataset is pictures of hands signing the alphabet. If we want to use this model to classify hand images later, it's unlikely that those hands are going to be upside-down, but, they might be left-handed. This kind of domain-specific reasoning can help make good decisions for your own deep learning applications.
 * Training with Augmentation: When using an image data generator with Keras, a model trains a bit differently: instead of just passing the x_train and y_train datasets into the model, we pass the generator in, calling the generator's flow method. This causes the images to get augmented live and in memory right before they are passed into the model for training. Generators can supply an indefinite amount of data, and when we use them to train our data, we need to explicitly set how long we want each epoch to run, or else the epoch will go on indefinitely, with the generator creating an indefinite number of augmented images to provide the model.
