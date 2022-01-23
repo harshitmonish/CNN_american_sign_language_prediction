@@ -50,3 +50,5 @@ Non-trainable params: 300
 * Finally made predictions on real dataset.
 
 ## Results
+
+![Prediction_of_sign_language_image](cnn_asl.png)
